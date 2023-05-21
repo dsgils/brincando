@@ -141,6 +141,8 @@
     </style>
 </head>
 <body id="body">
+<div id="htmltoimage" >
+
 <div id="tela">
     <div class="fechar" onclick="fechar()">X</div>
     
@@ -158,8 +160,12 @@
         <h1 id="h1">Descubra agora quem está <br>interessado em você.</h1>
         <input id="input" type="text" name="usuario" maxlength="10" placeholder="Digite seu nome" autofocus  oninput="this.value = this.value.replace(/[^a-z A-Z ã Ã â Â ç Ç á é í Á É Í À è ì À È Ì ê Ê ú Ù ù Ú ó Ò ô Ô ]/g, '')">
         <button id="button" onclick="show()" id="btn">Iniciar</button>
+        <p><button onclick="downloadimage()"> download</button></p>
         </div>
     </div>
+
+
+</div>
 
     <script>
 
@@ -210,19 +216,20 @@ function fechar(){
 }
 
 
-function share(){
-	if (navigator.share !== undefined) {
-		navigator.share({
-			title: 'Quem Esta de olho em você',
-			text: 'Gil',
-			
-           
-		})
-		.then(() => console.log('Successful share'))
-		.catch((error) => console.log('Error sharing', error));
-	}
-}
+import html2canvas from 'html2canvas';
 
+function downloadimage(){
+    
+	var container = document.getElementById("htmltoimage"); // full page 
+	html2canvas(container,{allowTaint : true}).then(function(canvas) {
+		var link = document.createElement("a");
+		document.body.appendChild(link);
+		link.download = "html_image.jpg";
+		link.href = canvas.toDataURL();
+		link.target = '_blank';
+		link.click();
+	});
+}
  
     </script>
 </body>
