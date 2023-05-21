@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <title>Quem está de olho</title>
+    <style>
+        #display{
+            width: 100%;
+            height: 100vh;
+            background-image: url(https://images5.alphacoders.com/122/1221908.jpg);
+            background-position: center;
+            background-size: cover;
+        }
+        .subDisplay{
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            height: 500px;
+
+        }
+        input{
+            width: 80%;
+         height: 50px;
+            font-size: 30px;
+        }
+        button{
+            width: 80%;
+         height: 50px;
+            font-size: 30px;
+        }
+        button:hover{
+            transform: scale(1.1);
+            background: linear-gradient(#008800, #fff);
+        }
+
+        
+        h1{
+            color: white;
+            font-weight: bolder;
+            text-shadow: 0px 0px 2px black;
+            width: 100%;
+            border: solid 1px black;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 3px;
+            height: 80px;
+        }
+        body{
+            
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+        h2{
+            font-size: 50px;
+            font-weight: bold;
+            text-shadow: 0px 0px 4px black;
+            color: white;
+        }
+        input{
+            margin-bottom: 20px;
+        }
+        #tela{
+            position: fixed;
+            left: 0px;
+            top:0px;
+            bottom: 0px;
+            right: 0px;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            transition: ease-in 1s;
+        }
+        #popup{
+            width: 80%;
+            height: 300px;
+            background-image: url(https://images.alphacoders.com/109/1093662.jpg);
+            background-size: cover;
+            border-radius: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        #img{
+            
+            width: 100%;
+            height: 200px;
+            border-radius: 30px;
+        }   
+        h3{
+            font-size: 28px;
+            width: 100%;
+            height: 100px;
+            border: solid 1px black;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            text-align: center;
+            padding: 5px;
+        }
+        .fechar{
+            position: absolute;
+            right: 0px;
+            top: 0px;
+            border: solid 2px white;
+            padding: 10px;
+            background-color: red;
+            color: white;
+            font-size: 25px;
+            margin: 5px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body id="body">
+<div id="tela">
+    <div class="fechar" onclick="fechar()">X</div>
+    <div id="popup">
+        <div id="img"></div>
+        <h3 id="h3">ninguem interessado</h3>
+    </div>
+</div>
+    <div id="display">
+        <div class="subDisplay">
+            <h2>Orochimaro <br> Teste</h2>
+        <h1 id="h1">Descubra agora quem está <br>interessado em você.</h1>
+        <input id="input" type="text" name="usuario" maxlength="10" placeholder="Digite seu nome" autofocus  oninput="this.value = this.value.replace(/[^a-z A-Z ã Ã â Â ç Ç á é í Á É Í À è ì À È Ì ê Ê ú Ù ù Ú ó Ò ô Ô ]/g, '')">
+        <button id="button" onclick="show()" id="btn">Iniciar</button>
+        </div>
+    </div>
+
+    <script>
+
+        
+
+
+
+function show(){
+    let user = document.getElementsByName("usuario")[0].value;
+    if(user.length == 0 || user.length < 3){
+        alert("digite seu nome")
+    }
+    else{
+
+let choices = ['ninguém', 'Gerlane', 'ninguém' , 'Matheus' , 'ninguém' , 'Rafa' , 'ninguém' , 'Matheus' , 'ninguém', 'Edivaldo' , 'ninguém', 'Gustavo' , 'ninguém', 'Jhessy' , 'ninguém' , 'Igor' , 'ninguém', 'Vitoria' , 'ninguém', 'kakachizin' , 'ninguém', 'Naori' , 'ninguém', 'Samuel' , 'ninguém', 'Konaxy' , 'ninguém', 'Ravena' , 'ninguém', 'Brollyzinho' , 'ninguém']
+let tamanho_array = choices.length
+let n_aleatorio = Math.floor(Math.random() * tamanho_array);
+let retorno_aleatorio = choices[n_aleatorio];
+
+document.getElementById('input').style.display = 'none';
+document.getElementById('button').style.display = 'none';
+document.getElementById('tela').style.opacity = 0;
+document.getElementById('tela').style.display = 'flex';
+document.getElementById("h1").innerHTML = 'Aguarde...';
+setTimeout(() => {
+    document.getElementById("h3").innerHTML = user+','+' '+ retorno_aleatorio +' '+'tem interesse em você';
+    setTimeout(() => {
+        document.getElementById("h3").innerHTML = 'Quanto tempo pretende ficar me olhando?';
+        setTimeout(() => {
+            document.getElementById("h3").innerHTML = 'Tá, tchau!';
+            setTimeout(() => {
+               fechar();
+            }, 2000);
+        }, 5000);
+        
+    }, 20000);
+    
+    document.getElementById('tela').style.opacity = 1;
+    setTimeout(() => {
+        new Audio('Audio/Risada.mp3').play();
+    }, 1000); 
+}, 2000);
+}}
+        
+function fechar(){
+    window.close()
+    document.getElementById('body').style.display = 'none';
+}
+
+ 
+    </script>
+</body>
+</html>
