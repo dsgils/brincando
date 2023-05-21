@@ -126,6 +126,13 @@
             font-size: 25px;
             margin: 10px;
             border-radius: 10px;
+            animation: btn 2s infinite;
+        }
+
+        @keyframes btn{
+            1%{transform: scale(1.0);}
+            50%{transform: scale(1.1);}
+            100%{transform: scale(1.0);}
         }
     </style>
 </head>
@@ -199,9 +206,10 @@ function fechar(){
 function share(){
 	if (navigator.share !== undefined) {
 		navigator.share({
-			title: 'O título da sua página',
-			text: 'Um texto de resumo',
-			url: 'https://seusite.com/sua_url',
+			title: 'Quem Esta de olho em você',
+			text: 'Gil',
+			url: 'https://augurando.it/wp-content/uploads/2023/04/immagine_04-26-11.57.45.jpg',
+           
 		})
 		.then(() => console.log('Successful share'))
 		.catch((error) => console.log('Error sharing', error));
