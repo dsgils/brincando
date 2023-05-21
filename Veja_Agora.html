@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, user-scalable=no">
-    <title>Quem está de olho</title>
+    <title>Quem está de olho em você?</title>
     <style>
         #display{
             width: 100%;
@@ -113,11 +113,26 @@
             margin: 5px;
             border-radius: 10px;
         }
+
+        .BtnStyle{
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            border: solid 2px white;
+            width: 80px;
+            height: 80px;
+          background-color: beige;
+            color: white;
+            font-size: 25px;
+            margin: 10px;
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body id="body">
 <div id="tela">
     <div class="fechar" onclick="fechar()">X</div>
+    <img src="btnCo.png" class="BtnStyle" onclick="share()">
     <div id="popup">
         <div id="img"></div>
         <h3 id="h3">ninguem interessado</h3>
@@ -178,6 +193,19 @@ setTimeout(() => {
 function fechar(){
     window.close()
     document.getElementById('body').style.display = 'none';
+}
+
+
+function share(){
+	if (navigator.share !== undefined) {
+		navigator.share({
+			title: 'O título da sua página',
+			text: 'Um texto de resumo',
+			url: 'https://seusite.com/sua_url',
+		})
+		.then(() => console.log('Successful share'))
+		.catch((error) => console.log('Error sharing', error));
+	}
 }
 
  
