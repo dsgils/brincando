@@ -18,12 +18,9 @@
             background-size: cover;
         }
         .subDisplay{
-            display: flex;
-            justify-content: space-evenly;
-            align-items: center;
-            flex-direction: column;
+           
             text-align: center;
-            height: 500px;
+            
 
         }
         input{
@@ -55,12 +52,16 @@
         body{
             
             background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         h2{
-            font-size: 50px;
+            font-size: 40px;
             font-weight: bold;
             text-shadow: 0px 0px 4px black;
             color: white;
+            animation: text 5s infinite;
         }
         input{
             margin-bottom: 20px;
@@ -138,75 +139,130 @@
             50%{transform: scale(1.1);}
             100%{transform: scale(1.0);}
         }
+        @keyframes text{
+            1%{transform: scale(1.0); color: white;}
+            50%{transform: scale(1.1); color: rgb(255, 0, 140);}
+            100%{transform: scale(1.0); color: white;}
+        }
+        #cora{
+            width: 50px;
+            height: 50px;
+            animation: text 5s infinite;
+        }
+        #video{
+            display: none;
+            height: 300px;
+        }
+        h4{
+            color: white;
+            font-size: 40px;
+            display: none;
+        }
     </style>
 </head>
 <body id="body">
-<div id="htmltoimage" >
 
+    
 <div id="tela">
     <div class="fechar" onclick="fechar()">X</div>
     
-    <a href="https://api.whatsapp.com/send?text= https://dsgils.github.io/brincando/Veja_Agora.html">
+    <a href="https://api.whatsapp.com/send?text="  onclick="location.href=this.href+' '+'Resultado do teste, quem está de olho em você:'+' '+user1+','+' '+user2+' '+'Está afim de min.';return false;">
         <img src="btnCo.png" class="BtnStyle">
     </a>
+    <h4 id="h4">Entretenimento</h4>
+    <video controls  id="video" width="100%" >
+            
+        <source src="Audio/memes.mp4" type="video/mp4">
+       
+    </video>
     <div id="popup">
+
         <div id="img"></div>
-        <h3 id="h3">ninguem interessado</h3>
+        <h3 id="h3"></h3>
     </div>
+
 </div>
     <div id="display">
         <div class="subDisplay">
-            <h2>Orochimaro <br> Teste</h2>
+            <h2 id="h2">Orochimaro <br> Teste do amor</h2>
+            <img id="cora" src="coracao.png" alt="erro">
         <h1 id="h1">Descubra agora quem está <br>interessado em você.</h1>
         <input id="input" type="text" name="usuario" maxlength="10" placeholder="Digite seu nome" autofocus  oninput="this.value = this.value.replace(/[^a-z A-Z ã Ã â Â ç Ç á é í Á É Í À è ì À È Ì ê Ê ú Ù ù Ú ó Ò ô Ô ]/g, '')">
-        <button id="button" onclick="show()" id="btn">Iniciar</button>
-        <p><button onclick="downloadimage()"> download</button></p>
+        <button id="button" disabled onclick="show()" id="btn">Iniciar</button>
         </div>
     </div>
 
-
-</div>
+    
 
     <script>
 
-        
+  setTimeout(() => {
+    document.getElementById('button').removeAttribute('disabled','disabled');
+  }, 3000);      
 
 
 
 function show(){
+    new Audio('Audio/Audio3.mp3').play();
     let user = document.getElementsByName("usuario")[0].value;
     if(user.length == 0 || user.length < 3){
-        alert("digite seu nome")
+        
+        document.getElementById("h1").innerHTML = 'Coloca o nome, santinho.';
+        setTimeout(() => {
+            document.getElementById("h1").innerHTML = 'vamos tentar denovo';
+            setTimeout(() => {
+                document.getElementById("h1").innerHTML = 'digite seu nome';
+            }, 5000);
+        }, 5000);
     }
     else{
 
-let choices = ['ninguém', 'Gerlane', 'ninguém' , 'Matheus' , 'ninguém' , 'Rafa' , 'ninguém' , 'Matheus' , 'ninguém', 'Edivaldo' , 'ninguém', 'Gustavo' , 'ninguém', 'Jhessy' , 'ninguém' , 'Igor' , 'ninguém', 'Vitoria' , 'ninguém', 'kakachizin' , 'ninguém', 'Naori' , 'ninguém', 'Samuel' , 'ninguém', 'Konaxy' , 'ninguém', 'Ravena' , 'ninguém', 'Brollyzinho' , 'ninguém']
+let choices = ['ninguém', 'Hinatinha', 'ninguém' , 'Matheus' , 'ninguém' , 'Rafa' , 'ninguém' , 'Matheus' , 'ninguém', 'Edivaldo' , 'ninguém', 'Gustavo' , 'ninguém', 'Jhessy' , 'ninguém' , 'Igor' , 'ninguém', 'Vitoria' , 'ninguém', 'kakachizin' , 'ninguém', 'Naori' , 'ninguém', 'Samuel' , 'ninguém', 'Konan' , 'ninguém', 'Ravena' , 'ninguém', 'Brollyzinho' , 'ninguém']
 let tamanho_array = choices.length
 let n_aleatorio = Math.floor(Math.random() * tamanho_array);
 let retorno_aleatorio = choices[n_aleatorio];
+
+user2 = retorno_aleatorio;
+user1 = user;
+document.getElementById('h2').style.display = 'none';
+document.getElementById('cora').style.display = 'none';
 
 document.getElementById('input').style.display = 'none';
 document.getElementById('button').style.display = 'none';
 document.getElementById('tela').style.opacity = 0;
 document.getElementById('tela').style.display = 'flex';
 document.getElementById("h1").innerHTML = 'Aguarde...';
+let img2 = document.getElementById('img');
 setTimeout(() => {
+    document.getElementById("h1").style.opacity = 0;
     document.getElementById("h3").innerHTML = user+','+' '+ retorno_aleatorio +' '+'tem interesse em você';
     setTimeout(() => {
-        document.getElementById("h3").innerHTML = 'Quanto tempo pretende ficar me olhando?';
-        setTimeout(() => {
-            document.getElementById("h3").innerHTML = 'Tá, tchau!';
-            setTimeout(() => {
-               fechar();
-            }, 2000);
-        }, 5000);
+        document.getElementById("h3").innerHTML = 'Compartilha ou tenta denovo';
         
-    }, 20000);
+        setTimeout(() => {
+            document.getElementById("h3").innerHTML = 'hahahaha...';
+            new Audio('Audio/Risada.mp3').play();
+        img2.style.backgroundImage = "url('img2.gif')"
+            
+                
+            setTimeout(() => {
+                document.getElementById('video').style.display = 'flex';
+                document.getElementById('h4').style.display = 'flex';
+                document.getElementById('popup').style.display = 'none';
+                document.getElementById('tela').style.flexDirection="column"
+                
+            }, 6000);
+            
+        }, 8000);
+        
+    }, 10000);
     
     document.getElementById('tela').style.opacity = 1;
+    new Audio('Audio/aplauso.mp3').play();
     setTimeout(() => {
-        new Audio('Audio/Risada.mp3').play();
+        new Audio('Audio/memes.mp3').play();
     }, 1000); 
+    
 }, 2000);
 }}
         
@@ -216,20 +272,9 @@ function fechar(){
 }
 
 
-import html2canvas from 'html2canvas';
 
-function downloadimage(){
-    
-	var container = document.getElementById("htmltoimage"); // full page 
-	html2canvas(container,{allowTaint : true}).then(function(canvas) {
-		var link = document.createElement("a");
-		document.body.appendChild(link);
-		link.download = "html_image.jpg";
-		link.href = canvas.toDataURL();
-		link.target = '_blank';
-		link.click();
-	});
-}
+
+
  
     </script>
 </body>
