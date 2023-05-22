@@ -93,7 +93,8 @@
         #img{
             
             width: 100%;
-            height: 200px;
+            height: 300px;
+            background-size: cover;
             border-radius: 30px;
         }   
         h3{
@@ -205,14 +206,23 @@
 function show(){
     new Audio('Audio/Audio3.mp3').play();
     let user = document.getElementsByName("usuario")[0].value;
-    if(user.length == 0 || user.length < 3){
+    if(user.length == 0 || user.length < 3 || user.length > 10 ){
         
-        document.getElementById("h1").innerHTML = 'Coloca o nome, santinho.';
+        document.getElementById("h1").innerHTML = 'Tudo Errado!.';
         setTimeout(() => {
             document.getElementById("h1").innerHTML = 'vamos tentar denovo';
             setTimeout(() => {
                 document.getElementById("h1").innerHTML = 'digite seu nome';
             }, 5000);
+            setTimeout(() => {
+                document.getElementById("h1").innerHTML = 'de 3 Caracteres até';
+            }, 5000);
+            setTimeout(() => {
+                document.getElementById("h1").innerHTML = '10 Caracteres';
+            }, 10000);
+            setTimeout(() => {
+                document.getElementById("h1").innerHTML = 'digite seu nome';
+            }, 15000);
         }, 5000);
     }
     else{
